@@ -11,34 +11,11 @@ using System.IO;
 namespace business.tests
 {
     [TestClass()]
-    public class emailTests
+    public class attachmentsTests
     {
         [TestMethod()]
-        public void sendTestWithoutAttachment()
-        {
-            /**
-             * The SMTP server requires a secure connection or the client was not authenticated.
-             */
-            email be = new email();
-            bool sent = be.sendTestEmail();
-
-            Assert.IsTrue(sent);
-        }
-
-        [TestMethod()]
-        public void sendTestWithAttachment()
-        {
-            /**
-             * The SMTP server requires a secure connection or the client was not authenticated.
-             */
-            email be = new email();
-            bool sent = be.sendTestEmailWithAttachment();
-
-            Assert.IsTrue(sent);
-        }
-
-        [TestMethod()]
-        public void attachmentDoesNotTest()
+        [TestCategory("Attachment Test")]
+        public void attachmentDoesNotExistTest()
         {
             string filename = @"d:\\testr.zip";
 
@@ -49,6 +26,7 @@ namespace business.tests
         }
 
         [TestMethod()]
+        [TestCategory("Attachment Test")]
         public void attachmentExistsTest()
         {
             string filename = @"d:\\test.7z";

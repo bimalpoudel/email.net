@@ -20,23 +20,23 @@ namespace business.tests
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void fromNameTest()
         {
-            configurations c = new configurations();
-
             Assert.IsNotNull(c.fromName);
             Assert.AreNotEqual("", c.fromName);
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void fromEmailTest()
         {
-
             Assert.IsNotNull(c.fromEmail);
             Assert.AreNotEqual("", c.fromEmail);
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void toNameTest()
         {
             Assert.IsNotNull(c.toName);
@@ -44,6 +44,7 @@ namespace business.tests
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void toEmailTest()
         {
             Assert.IsNotNull(c.toEmail);
@@ -51,35 +52,35 @@ namespace business.tests
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void usernameTest()
         {
-
             Assert.IsNotNull(c.username);
             Assert.AreNotEqual("", c.username);
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void passwordTest()
         {
-
             Assert.IsNotNull(c.password);
             Assert.AreNotEqual("", c.password);
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void hostnameTest()
         {
-
             Assert.IsNotNull(c.hostname);
             Assert.AreNotEqual("", c.hostname);
         }
 
         [TestMethod()]
+        [TestCategory("Value Test")]
         public void portnumberTest()
         {
             Assert.IsNotNull(c.portnumber);
             Assert.AreNotEqual("", c.portnumber);
-
         }
     }
 }
