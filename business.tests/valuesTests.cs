@@ -20,7 +20,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void fromNameTest()
         {
             Assert.IsNotNull(c.fromName);
@@ -28,7 +28,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void fromEmailTest()
         {
             Assert.IsNotNull(c.fromEmail);
@@ -36,7 +36,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void toNameTest()
         {
             Assert.IsNotNull(c.toName);
@@ -44,7 +44,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void toEmailTest()
         {
             Assert.IsNotNull(c.toEmail);
@@ -52,7 +52,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void usernameTest()
         {
             Assert.IsNotNull(c.username);
@@ -60,7 +60,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void passwordTest()
         {
             Assert.IsNotNull(c.password);
@@ -68,7 +68,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void hostnameTest()
         {
             Assert.IsNotNull(c.hostname);
@@ -76,7 +76,7 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Value Test")]
+        [TestCategory("Configuration Value Test")]
         public void portnumberTest()
         {
             Assert.IsNotNull(c.portnumber);

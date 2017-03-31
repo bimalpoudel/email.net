@@ -14,8 +14,8 @@ namespace business.tests
     public class attachmentsTests
     {
         [TestMethod()]
-        [TestCategory("Attachment Test")]
-        public void attachmentDoesNotExistTest()
+        [TestCategory("File Attachment Test")]
+        public void attachNonExistingFileTest()
         {
             string filename = "d:\\non-existing.zip";
 
@@ -26,8 +26,8 @@ namespace business.tests
         }
 
         [TestMethod()]
-        [TestCategory("Attachment Test")]
-        public void attachmentExistsTest()
+        [TestCategory("File Attachment Test")]
+        public void attachExistingFileTest()
         {
             string filename = "d:\\existing.zip";
 
