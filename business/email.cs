@@ -13,23 +13,20 @@ namespace business
 {
     public class email
     {
-        /**
-         * Test sending an email
-         */
-        public bool sendTestEmail()
-        {
-            bool success = false;
-            configurations ec = new configurations();
+        protected configurations ec;
+        protected MailAddress fromAddress;
+        protected SmtpClient smtp;
+        protected List<Attachment> attachments;
 
-            MailAddress fromAddress = new MailAddress(ec.fromEmail, ec.fromName);
-            MailAddress toAddress = new MailAddress(ec.toEmail, ec.toName);
+        public email()
+        {
+            ec = new configurations();
+            this.attachments = new List<Attachment>();
 
             string password = ec.password;
-            string subject = "Subject";
-            string body = "Body";
             int portNumber = Convert.ToInt32(ec.portnumber);
-
-            SmtpClient smtp = new SmtpClient
+            fromAddress = new MailAddress(ec.fromEmail, ec.fromName);
+            this.smtp = new SmtpClient
             {
                 Host = ec.hostname,
                 Port = portNumber,
@@ -38,63 +35,45 @@ namespace business
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, password)
             };
-
-            using (MailMessage message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                string filename = "d:\\testr.7z";
-                if (this.attachableFile(filename))
-                {
-                    message.Attachments.Add(new Attachment(filename));
-                }
-                smtp.Send(message);
-
-                success = true;
-            }
-
-            return success;
         }
 
-        /**
-         * Test sending an email with attachment
-         */
-        public bool sendTestEmailWithAttachment()
+        public void SMTPConfigurations()
+        {
+            // configure email sender with user parameters
+        }
+
+ 
+
+        public bool send(string to, string subject, string body)
         {
             bool success = false;
-            configurations ec = new configurations();
-
-            MailAddress fromAddress = new MailAddress(ec.fromEmail, ec.fromName);
             MailAddress toAddress = new MailAddress(ec.toEmail, ec.toName);
-
-            string password = ec.password;
-            string subject = "Subject";
-            string body = "Body";
-            int portNumber = Convert.ToInt32(ec.portnumber);
-
-            SmtpClient smtp = new SmtpClient
-            {
-                Host = ec.hostname,
-                Port = portNumber,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, password)
-            };
 
             using (MailMessage message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subject,
-                Body = body
+                Body = body,
+                IsBodyHtml = true,
             })
             {
-                string filename = "d:\\test.7z";
-                if (this.attachableFile(filename))
+               // string filename = "d:\\testr.7z";
+               // if (this.attachableFile(filename))
+               // {
+               //     /**
+               //      * @see https://msdn.microsoft.com/en-us/library/system.net.mime.contenttype.mediatype(v=vs.110).aspx
+               //      */
+               //     message.Attachments.Add(new Attachment(filename));
+               // }
+
+                foreach(Attachment attachment in this.attachments)
                 {
-                    message.Attachments.Add(new Attachment(filename));
+                    /**
+                    * @see https://msdn.microsoft.com/en-us/library/system.net.mime.contenttype.mediatype(v=vs.110).aspx
+                    * @see http://stackoverflow.com/questions/527214/how-do-i-add-an-attachment-to-an-email-using-system-net-mail
+                    */
+                    message.Attachments.Add(attachment);
                 }
+
                 smtp.Send(message);
 
                 success = true;
@@ -103,9 +82,11 @@ namespace business
             return success;
         }
 
-        public bool attachableFile(string filename)
+        protected bool attachableFile(string filename)
         {
-            // @see http://stackoverflow.com/questions/1395205/better-way-to-check-if-a-path-is-a-file-or-a-directory
+            /**
+             * @see http://stackoverflow.com/questions/1395205/better-way-to-check-if-a-path-is-a-file-or-a-directory
+             */
             bool isDir = true;
             bool isFile = File.Exists(filename);
 
@@ -116,6 +97,22 @@ namespace business
             }
 
             return isFile && !isDir;
+        }
+
+        public bool attach(string filename)
+        {
+            bool isAttachable = this.attachableFile(filename);
+            if(isAttachable)
+            {
+                /**
+                 * System.NullReferenceException
+                 * Additional information: Object reference not set to an instance of an object.
+                 */
+                Attachment attachment = new Attachment(filename);
+                this.attachments.Add(attachment);
+            }
+
+            return isAttachable;
         }
     }
 }
