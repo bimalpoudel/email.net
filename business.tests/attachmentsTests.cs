@@ -17,10 +17,10 @@ namespace business.tests
         [TestCategory("Attachment Test")]
         public void attachmentDoesNotExistTest()
         {
-            string filename = @"d:\\testr.zip";
+            string filename = "d:\\non-existing.zip";
 
             email ea = new email();
-            bool attachable = ea.attachableFile(filename);
+            bool attachable = ea.attach(filename);
 
             Assert.IsFalse(attachable);
         }
@@ -29,10 +29,10 @@ namespace business.tests
         [TestCategory("Attachment Test")]
         public void attachmentExistsTest()
         {
-            string filename = @"d:\\test.7z";
+            string filename = "d:\\existing.zip";
 
             email ea = new email();
-            bool attachable = ea.attachableFile(filename);
+            bool attachable = ea.attach(filename);
 
             Assert.IsTrue(attachable);
         }
